@@ -4,26 +4,26 @@ using UnityEngine;
 
 public class Generator : MonoBehaviour
 {
-    public int elements = 12;
-    public float radius = 10;
-
-    public float rings = 9;
-    public GameObject mp;
+    public int loops = 10;
+    public GameObject prefab;
     // Start is called before the first frame update
     void Start()
     {
-        for (int j = 0; j < rings; j++)
+        int radius = 1;
+        for(int i = 1 ; i <= loops ; i ++)
         {
-            float theta = Mathf.PI * 2.0f / (float)(elements *j);
-            for (int i = 0; i < (elements * j); i++)
+            int numPrefabs = (int)(2.0f * Mathf.PI * i * radius);
+            float theta = Mathf.PI * 2.0f / ((float)numPrefabs);
+            for (int j = 0 ; j < numPrefabs ; j ++)
             {
-                GameObject prefab = Instantiate(mp);
-                float sizex = prefab.GetComponent<Renderer>().bounds.size.x;
-                float sizez = prefab.GetComponent<Renderer>().bounds.size.z;
-                //sizex = sizex * 2;
-                //sizez = sizez * 2;
-                Vector3 pos = new Vector3(Mathf.Sin(theta * i) * (sizex * j), 0, Mathf.Cos(theta * i) * (sizez * j));
-                mp.transform.position = transform.TransformPoint(pos);
+                float angle  = j * theta; 
+                float x = Mathf.Sin(angle) * radius * (i) * 1.1f;
+                float y = Mathf.Cos(angle) * radius * (i) * 1.1f;
+                GameObject g = GameObject.Instantiate<GameObject>(prefab);
+                g.transform.position = new Vector3(x, y, 0);
+                g.GetComponent<Renderer>().material.color =
+                    Color.HSVToRGB(j / (float) numPrefabs, 1, 1);
+                g.transform.parent = this.transform;
             }
         }
     }
@@ -31,6 +31,9 @@ public class Generator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            
+        }
     }
 }
