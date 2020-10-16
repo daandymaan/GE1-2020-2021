@@ -20,11 +20,21 @@ public class Shooting : MonoBehaviour
         bullet.transform.rotation = this.transform.rotation;
     }
 
-    System.Collections.IEnumerator ShootingCoroutine() {
-        while(true){
-            if (Input.GetButton("Fire1")){
+    void OnEnable()
+    {
+        StartCoroutine(ShootingCoroutine());
+    }
+
+    bool shooting = false;
+
+    System.Collections.IEnumerator ShootingCoroutine()
+    {
+        while(true)
+        {
+            if (Input.GetButton("Fire1"))
+            {
                 Shoot();
-                yield return new WaitForSeconds(1.0f/ (float)(fireRate));
+                yield return new WaitForSeconds(1.0f / fireRate);
             }
             yield return null;
         }
@@ -33,6 +43,6 @@ public class Shooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 }
