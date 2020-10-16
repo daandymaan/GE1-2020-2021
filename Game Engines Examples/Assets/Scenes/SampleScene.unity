@@ -457,6 +457,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 1690027507}
   bulletPrefab: {fileID: 1850118630018322559, guid: c060ee05cdf4e1b408c057f1877b2636,
     type: 3}
+  fireRate: 3
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,7 +583,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &868811789
 GameObject:
@@ -612,7 +613,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1145376713
 GameObject:
@@ -920,7 +921,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1846865778
 GameObject:
@@ -935,7 +936,6 @@ GameObject:
   - component: {fileID: 1846865781}
   - component: {fileID: 1846865780}
   - component: {fileID: 1846865779}
-  - component: {fileID: 1846865784}
   m_Layer: 0
   m_Name: tank2
   m_TagString: Untagged
@@ -1034,24 +1034,8 @@ Transform:
   m_Children:
   - {fileID: 1977720827}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1846865784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1846865778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb7e428db596c8843b1e40ef8ac0cb4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
-  rotationspeed: 2
-  numOfWaypoints: 12
-  player: {fileID: 482222220}
 --- !u!1 &1977720826
 GameObject:
   m_ObjectHideFlags: 0
