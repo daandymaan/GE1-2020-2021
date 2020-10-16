@@ -5,24 +5,42 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public float radius = 10;
+    public float radius = 40;
 
-    public int spawnRate = 5;
+    public int spawnRate = 1;
+    
+    public int despawnRate = 4;
 
-    public int max = 10;
+    public int max = 5;
+
+    public GameObject spawnedTank;
 
     void Spawn()
     {
-        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        cube.GetComponent<Renderer>().material.color = 
-            Color.HSVToRGB(Random.Range(0.0f, 1.0f), 1, 1);
+        GameObject g = GameObject.Instantiate<GameObject>(spawnedTank);
         Vector3 pos = new Vector3(Random.Range(-radius, radius), 0, Random.Range(-radius, radius));
 
-        cube.AddComponent<Rigidbody>();
-        cube.transform.position = transform.TransformPoint(pos);
+        g.AddComponent<Rigidbody>();
+        g.transform.position = transform.TransformPoint(pos);
 
-        cube.transform.parent = this.transform;
-        cube.tag = "Cube";
+        g.transform.parent = this.transform;
+        g.tag = "Cube";
+    }
+
+    void DeSpawn(){
+        GameObject[] tanks = GameObject.FindGameObjectsWithTag("Cube");
+        GameObject child = tanks[0].transform.GetChild(0).gameObject;
+        Destroy(tanks[0], 7);
+    }
+    void RemoveCollider()
+    {
+        GameObject[] tanks = GameObject.FindGameObjectsWithTag("Cube");
+        tanks[0].GetComponent<Collider>().enabled = false;
+        GameObject child = tanks[0].transform.GetChild(0).gameObject;
+        child.GetComponent<Collider>().enabled = false;
+        DeSpawn();
+        
+
     }
     // Start is called before the first frame update
     void Start()
@@ -33,6 +51,7 @@ public class Spawner : MonoBehaviour
     void OnEnable()
     {
         StartCoroutine(SpawnCoroutine());
+        //StartCoroutine(DeSpawnCoroutine());
     }
 
     int count = 0;
@@ -41,8 +60,6 @@ public class Spawner : MonoBehaviour
     {
         while(true)
         {
-            Spawn();
-            
             /*
             count ++;
             if (transform.childCount == max)
@@ -50,15 +67,28 @@ public class Spawner : MonoBehaviour
                 break;
             }
             */
-            GameObject[] cubes =
-                GameObject.FindGameObjectsWithTag("Cube");
-            if (cubes.Length == max)
+            GameObject[] cubes = GameObject.FindGameObjectsWithTag("Cube");
+            if (cubes.Length < max)
             {
-                break;
+                Spawn();
             }
             yield return new WaitForSeconds(1.0f / (float)spawnRate); 
         }
     }
+     System.Collections.IEnumerator DeSpawnCoroutine()
+    {
+        while(true)
+        {
+            GameObject[] cubes = GameObject.FindGameObjectsWithTag("Cube");
+            if (cubes.Length  > 0)
+            {
+                RemoveCollider();
+            }
+
+            yield return new WaitForSeconds(despawnRate); 
+        }
+    }
+
 
 
 

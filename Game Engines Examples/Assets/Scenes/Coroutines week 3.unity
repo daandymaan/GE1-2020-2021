@@ -491,6 +491,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 10
   spawnRate: 1
+  max: 10
 --- !u!4 &1225839543
 Transform:
   m_ObjectHideFlags: 0
